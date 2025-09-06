@@ -476,17 +476,17 @@ func main() {
 	durationFlag := flag.Int("d", 24 * 60, "thời gian scan")
 	timeoutFlag := flag.Int("t", 2, "timeout check mạc định 2s")
 	stdinFlag := flag.Bool("stdin", false, "Bật Cờ stdin ( viết tool đọc nhưu zmap )")
-	maxWorkersFlag := flag.Int("wr", 5000, "số max (nhiều quá bị die lock chưa fix được)workers")
+	maxWorkersFlag := flag.Int("wr", 7000, "số max (nhiều quá bị die lock chưa fix được)workers")
 	minRateFlag := flag.Int("min-rate", 1000, "tối thiểu rate")
 	
 	flag.Parse()
 	
 	
 	maxWorkers = int32(*maxWorkersFlag)
-	if maxWorkers < 100 {
+	if maxWorkers < 300 {
 		maxWorkers = 100
-	} else if maxWorkers > 10000 {
-		maxWorkers = 10000 
+	} else if maxWorkers > 12000 {
+		maxWorkers = 12000
 	}
 	
 	// xem có cờ | (tool chạy đằng sau không có thì bật flag đó = true như zmap)
@@ -505,8 +505,8 @@ func main() {
 	if targetRate < minRate {
 		targetRate = minRate
 	}
-	if targetRate > 10000 {
-		targetRate = 10000
+	if targetRate > 12000 {
+		targetRate = 12000
 	}
 	
 	
@@ -547,8 +547,8 @@ func main() {
 	initialWorkers := targetRate / 20
 	
 
-	if initialWorkers < numCPU*10 {
-		initialWorkers = numCPU * 10
+	if initialWorkers < numCPU*32 {
+		initialWorkers = numCPU * 32
 	}
 	
 	if initialWorkers > int(maxWorkers/2) {
