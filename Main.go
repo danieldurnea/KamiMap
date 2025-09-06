@@ -1,4 +1,4 @@
-package main
+ypackage main
 
 import (
 	"bufio"
@@ -467,7 +467,7 @@ func hasStdinInput() bool {
 
 func main() {
 	
-	port := flag.Int("p", 80, "Port Cần scan mặch định 80")
+	port := flag.Int("p", 22, "Port Cần scan mặch định 80")
 	targetFile := flag.String("w", "", "file chứa list cần scan ")
 	blacklistFile := flag.String("b", "", "danh sách list cần block")
 	scanRateFlag := flag.Int("B", 2000, "rate /s")
